@@ -33,6 +33,7 @@ void print_args(char ** a){
   }
 }
 
+/*
 char * trim(char * line){
   char * p;
   int i;
@@ -40,3 +41,5 @@ char * trim(char * line){
 
   return p;
 }
+ */
+
