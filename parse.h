@@ -3,5 +3,5 @@
 char ** parse_args(char * line);
 void print_args(char ** a);
 int count_tokens(char * line, char delim);
-char * trim(char * line);
+// char * trim(char * line);
 #endif
