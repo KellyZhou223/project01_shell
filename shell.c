@@ -3,14 +3,15 @@
 #include <unistd.h>
 #include <sys/wait.h>
 #include <time.h>
-#include "parse.c"
+#include "parse.h"
 #include "shell.h"
 
+/*
 // fork off the child process
 void forking(char *command){
     srand(time(NULL));
     char ** run = parse_args(command);
-    
+
     if (strcmp(run[0], "cd") != 0){
         chdir(args[1]); // checks first command for changing directory
     }
@@ -27,5 +28,4 @@ void forking(char *command){
     }
     free(run);
 }
-
-
+*/
