@@ -3,9 +3,29 @@
 #include <unistd.h>
 #include <sys/wait.h>
 #include <time.h>
+#include <string.h>
 #include "parse.h"
 #include "shell.h"
 
+void run_command(char** command){
+
+  int f = fork();
+
+  if (f){
+    //printf("this is parent\n");
+  }
+  else{
+    //printf("this is child\n");
+    if (strcmp(command[0],"cd")==0){
+      printf("hello\n");
+      chdir("..");
+    }
+    else {
+    execvp(command[0], command);
+    }
+  }
+
+}
 /*
 // fork off the child process
 void forking(char *command){
@@ -26,6 +46,5 @@ void forking(char *command){
             // i'm not really sure where (and how) to use execvp?
         }
     }
-    free(run);
-}
-*/
+    //free(run);
+}*/

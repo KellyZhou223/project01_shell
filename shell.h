@@ -1,4 +1,4 @@
 #ifndef SHELL_H
 #define SHELL_H
-void forking(char *command);
+void run_command(char** command);
 #endif

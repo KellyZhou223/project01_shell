@@ -13,12 +13,12 @@ int count_tokens(char * line, char delim){
   return num_tokens;
 }
 
-char ** parse_args(char * line){
+char ** parse_args(char * line, char * delim){
   char *p = line;
   int i=0;
 
   while (p){
-    args[i]= strsep(&p, " ");
+    args[i]= strsep(&p, delim);
     i++;
   }
 
@@ -35,7 +35,19 @@ void print_args(char ** a){
 
 
 char * trim(char * line){
-  
+  char *p=line;
+  int start, i;
+  char space = ' ';
+
+  for (start=0;p[start]==space;start++);
+
+  for (i=0; p[i+1]; i++){
+    p[i]=p[i+start];
+  }
+
+  for (i=0;p[i];i++){
+    if (p[i]==space) p[i]='\0';
+  }
 
   return p;
 }
