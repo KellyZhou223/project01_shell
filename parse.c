@@ -2,6 +2,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include "parse.h"
+#include "shell.h"
 
 int count_tokens(char * line, char delim){
   int num_tokens=0;
@@ -17,12 +18,8 @@ char ** parse_args(char * line, char * delim){
   int i=0;
   char **args = malloc (sizeof (char**) * 100 );
 
-  //printf("hello\n");
-  //printf("%c\n", *p);
   while (p){
-    //printf("%s\n", p);
     args[i]= strsep(&p, delim);
-    //printf("args[%d]: %s\n", i, args[i]);
     i++;
   }
 
