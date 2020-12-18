@@ -1,8 +1,7 @@
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
 #include "parse.h"
-
-char *args[5];
 
 int count_tokens(char * line, char delim){
   int num_tokens=0;
@@ -16,9 +15,14 @@ int count_tokens(char * line, char delim){
 char ** parse_args(char * line, char * delim){
   char *p = line;
   int i=0;
+  char **args = malloc (sizeof (char**) * 100 );
 
+  //printf("hello\n");
+  //printf("%c\n", *p);
   while (p){
+    //printf("%s\n", p);
     args[i]= strsep(&p, delim);
+    //printf("args[%d]: %s\n", i, args[i]);
     i++;
   }
 

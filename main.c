@@ -1,29 +1,33 @@
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
+#include <unistd.h>
 #include "parse.h"
 #include "shell.h"
 
-int main(int argc, char **argv){
-  char line[] = "ls -l;ls -a";
-  char line2[] = "cd ..";
-  int i=0;
-  char space[] = " ";
-  char ** args = parse_args(line2, space);
-  while (args[i]){
-    printf("%s\n",args[i]);
-    i++;
-  }
-  //print_args(args);
-  run_command(args);
-  /*while (argv[i]){
-    printf("%s\n", argv[i]);
-    i++;
-  }*/
-  char delim = ';';
-  //printf("if u see this ur cool\n");
-  //char *cut = trim(line);
+int main(){
+  //while (1){
+    char input[100]="";
+    printf("skssh$");
+    fgets(input, sizeof(input)-1,stdin);
 
-  //printf("number of tokens: %d\n", count_tokens(line,delim));
-  //print_args(args);
+    //char line[] = "ls -l;ls -a";
+
+    int i;
+    char space[] = " ";
+    char semicolon[] = ";";
+    char ** command;
+
+    char ** args = parse_args(input, semicolon);
+    for (i=0; args[i]; i++){
+      command = parse_args(args[i], space);
+      run_command(command);
+      sleep(1);
+    }
+
+    free(args);
+    free(command);
+  //}
+
   return 0;
 }
