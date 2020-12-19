@@ -25,6 +25,7 @@ void run_command(char** command){
   if (f){
     wait(&status);
   }
+
   else{
     if (strcmp(command[0],"cd")==0){
       int cd = chdir(command[1]);
