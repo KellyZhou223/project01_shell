@@ -1,5 +1,5 @@
 ## SKSSH
-by Kelly Zhou, Sunny Li, and Serena Chan
+By: Kelly Zhou, Sunny Li, and Serena Chan\
 TNPG: Forked Child
 
 ### Features:
@@ -15,6 +15,7 @@ TNPG: Forked Child
 ---
 
 ### Bugs:
+- Entering an empty line or an invalid command causes shell to require multiple "exit" to exit
 
 ---
 
