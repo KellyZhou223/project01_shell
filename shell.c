@@ -22,24 +22,25 @@ void run_command(char** command){
     if (!strcmp(command[i], ">") || !strcmp(command[i], ">>") || !strcmp(command[i], "<")) {
       redir = 1;          // detects redirection and set redirection to true
       redir_index = i;    // index of redirection symbol
-
-      i++;
     }
 
-    if (strcmp(command[0],"exit")==0){
-      exit(0);
+    i++;
+  }
+
+  if (strcmp(command[0],"exit")==0){
+    exit(0);
+  }
+
+  f = fork();
+
+  if (f){
+    wait(&status);
+  }
+
+  else{
+    if (strcmp(command[0],"cd")==0){
+      int cd = chdir(command[1]);
     }
-
-    f = fork();
-
-    if (f){
-      wait(&status);
-    }
-
-    else{
-      if (strcmp(command[0],"cd")==0){
-        int cd = chdir(command[1]);
-      }
     else if (redir) {                   // if redirection is true, run redirection function
       redirect(command, redir_index);
     }
