@@ -11,11 +11,13 @@ TNPG: Forked Child
 
 ### Attempted:
 - Some issues with trimming whitespace (?)
+- An outline for redirection
 
 ---
 
 ### Bugs:
-- Entering an empty line or an invalid command causes shell to require multiple "exit" to exit
+- Entering an empty line or an invalid command causes shell to require more "exit" to exit
+- Calling redirection functions causes shell to require more "exit" to exit ?
 
 ---
 
