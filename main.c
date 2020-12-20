@@ -16,7 +16,7 @@ int main(){
     char input[100];
     char ** command;
 
-    printf("skssh$");
+    printf("skssh$ ");
     fgets(input, sizeof(input)-1,stdin);
 
     trim_input(input);
@@ -25,7 +25,7 @@ int main(){
     for (i=0; args[i]; i++){
       command = parse_args(args[i], space);
       run_command(command);
-      sleep(1);
+      //sleep(1);
     }
 
     free(args);
