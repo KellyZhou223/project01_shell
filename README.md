@@ -11,13 +11,14 @@ TNPG: Forked Child
 
 ### Attempted:
 - Some issues with trimming whitespace (?)
-- An outline for redirection
+- Redirection may not work (?)
+- An outline for pipes
 
 ---
 
 ### Bugs:
 - Entering an empty line or an invalid command causes shell to require more "exit" to exit
-- Calling redirection functions causes shell to require more "exit" to exit ?
+- Calling redirection/pipe functions causes shell to require more "exit" to exit (?)
 
 ---
 
@@ -61,7 +62,7 @@ TNPG: Forked Child
   ```
   
   #### shell.c
-  * Forks and executes the command, does redirecting and piping 
+  * Forks and executes the command, also does redirecting and piping 
   ```
   /*======== void run_command() ==========
   Inputs:  char **command
