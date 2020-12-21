@@ -23,7 +23,7 @@ TNPG: Forked Child
 
 ### Files and Function Headers:
 #### parse.c
-  * Parses argument
+  * Parses both singular and multiple commands in one line
   ```
   /*======== int count_tokens() ==========
   Inputs:  char *line
@@ -58,3 +58,32 @@ TNPG: Forked Child
   Removes leading and trailing whitespace in the line by replacing the first and last term
   Terminating '\0' is placed at the end of the string if the last term is whitespace
   ====================*/  
+  ```
+  
+  #### shell.c
+  * Forks and executes the command, does redirecting and piping 
+  ```
+  /*======== void run_command() ==========
+  Inputs:  char **command
+  Returns: 
+  
+  ====================*/
+  
+  /*======== int length_input() ==========
+  Inputs:  char *input
+  Returns: 
+  
+  ====================*/
+  
+  /*======== void trim_input() ==========
+  Inputs:  char *input
+  Returns: 
+  
+  ====================*/ 
+  
+  /*======== void redirect(char ** cmd, int index) ==========
+  Inputs:  char **cmd, int index
+  Output:  
+  
+  ====================*/
+  ```
