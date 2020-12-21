@@ -16,12 +16,20 @@ void run_command(char** command){
   int redir = 0;        // redirection is false
   int redir_index = 0;  // index of redirection symbol
 
+  int pipe = 0;       // pipe is false
+  int pipe_index = 0; // index of pipe symbol
+
   while (command[i]) {
     command[i] = trim(command[i]);
     
     if (!strcmp(command[i], ">") || !strcmp(command[i], ">>") || !strcmp(command[i], "<")) {
       redir = 1;          // detects redirection and set redirection to true
       redir_index = i;    // index of redirection symbol
+    }
+
+    if (!strcmp(command[i], "|")) {
+      pipe = 1;          // detects piping and set pipe to true
+      pipe_index = i;    // index of pipe symbol
     }
 
     i++;
@@ -43,6 +51,9 @@ void run_command(char** command){
     }
     else if (redir) {                   // if redirection is true, run redirection function
       redirect(command, redir_index);
+    }
+    else if (pipe) {                    // if pipe is true, run pipe function
+      pipe_func(command, pipe_index);
     }
     else {
       execvp(command[0], command);
@@ -96,22 +107,11 @@ void redirect(char ** cmd, int index){
     }
 }
 
-/* (previous outline)
-void redirect(char** cmd, int index) {
-    if (strcmp(cmd[index], ">") == 0) {
-        printf("Redirects stdout to a file.\n");
+int pipe_func(char ** cmd, int index) {
+  printf("Piping...\n");
 
-        int fd1 = open(cmd[index+1], O_WRONLY);
-        if (fd1 < 0){
-            printf("Error opening the file\n");
-        }
-    }
-    else if (strcmp(cmd[index], ">>") == 0) {
-        printf("Redirects stdout to a file by appending.\n");
-    }
-    else if (strcmp(cmd[index], "<") == 0) {
-        printf("Redirect stdin from a file.\n");
-    }
+
+
+
+  return 0; // successfully ran
 }
-*/
-
