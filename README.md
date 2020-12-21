@@ -4,6 +4,7 @@ TNPG: Forked Child
 
 ## Features:
 - Forks and executes commands
+- handles multiple commands on one line using ";" as a delimiter (no spaces before or after ";")
 - Parses commands
 - Unfinished: Redirection, Piping
 
