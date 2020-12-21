@@ -4,9 +4,8 @@ TNPG: Forked Child
 
 ## Features:
 - Forks and executes commands
-- handles multiple commands on one line using ";" as a delimiter (no spaces before or after ";")
+- Handles multiple commands on one line using ";" as a delimiter (no spaces before or after ";")
 - Parses commands
-- Unfinished: Redirection, Piping
 
 ---
 
@@ -20,6 +19,8 @@ TNPG: Forked Child
 ## Bugs:
 - Entering an empty line or an invalid command causes shell to require more "exit" to exit
 - Calling redirection/pipe functions causes shell to require more "exit" to exit (?)
+- When running multiple commands on one line, including a space before and after ; will not work
+  (ex. ls -l ; echo hello does not work, but ls -l;echo hello does)
 
 ---
 
@@ -70,26 +71,35 @@ TNPG: Forked Child
   ```
   /*======== void run_command() ==========
   Inputs:  char **command
-  Returns: 
+  Output: Runs the command supplied by user
   
+  Checks for redirection and pipe symbols and directs the command call to the necessary functions
+  Takes care of forking
+  Detects cd and exit in the command, uses chdir and exit respectively 
   ====================*/
   
   /*======== int length_input() ==========
   Inputs:  char *input
-  Returns: 
+  Returns: Length of the inputted string 
   
   ====================*/
   
   /*======== void trim_input() ==========
   Inputs:  char *input
-  Returns: 
-  
+
+  Replaces all occurrences of spaces in string with whitespace (to allow for run function to work properly)  
   ====================*/ 
   
   /*======== void redirect(char ** cmd, int index) ==========
   Inputs:  char **cmd, int index
-  Output:  
   
+  Redirects input by detecting redirection symbols ("<", ">", ">>").
+  ====================*/
+  
+  /*======== int pipe_func(char ** cmd, int index) ==========
+  Inputs:  char **cmd, int index
+  
+  Pipes commands; the output of the first command is used as the input for the second
   ====================*/
   ```
 
