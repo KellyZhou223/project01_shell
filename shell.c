@@ -51,9 +51,12 @@ void run_command(char** command){
 }
 
 int length_input(char* input){
-  int i;
-  for (i=0;input[i];i++);
-    return i;
+    int i;
+    int len = 0;
+    for (i=0;input[i];i++){
+      len++;
+    }
+    return len;
 }
 
 void trim_input(char * input){
@@ -65,22 +68,50 @@ void trim_input(char * input){
     }
   }
 }
-
-void redirect(char** cmd, int index) {
-  if (strcmp(cmd[index], ">") == 0) {
-    printf("Redirects stdout to a file.\n");
-
-    int fd1 = open(cmd[index+1], O_WRONLY);
-
-    if (fd1 < 0)
-      printf("Error opening the file\n");
-  }
-
-  else if (strcmp(cmd[index], ">>") == 0) {
-    printf("Redirects stdout to a file by appending.\n");
-  }
-
-  else if (strcmp(cmd[index], "<") == 0) {
-    printf("Redirect stdin from a file.\n");
-  }
+ 
+void redirect(char ** cmd, int index){
+    int i;
+    for (i = 0; cmd[i]; i++){
+        if (strcmp(cmd[index], ">") == 0) {
+            // redirects stdout to a file
+            int fd1 = open(cmd[index+1], O_WRONLY);
+            if (fd1 < 0){ // do we need this?
+                printf("Error opening the file\n");
+            }
+            dup2(fd1, STDOUT_FILENO);
+        }
+        else if (strcmp(cmd[index], ">>") == 0){
+            // redirects stdout to a file by appending
+            int fd1 = open(cmd[i+1], O_CREAT | O_RDWR | O_APPEND, 0644);
+            if (fd1 < 0){
+                printf("Error opening the file\n");
+            }
+            dup2(fd1, STDOUT_FILENO);
+        }
+        else if (strcmp(cmd[index], "<") == 0){
+            // redirects stdin from a file
+            int fd2 = open(cmd[i + 1], O_RDONLY);
+            dup2(fd2, STDIN_FILENO);
+        }
+    }
 }
+
+/* (previous outline)
+void redirect(char** cmd, int index) {
+    if (strcmp(cmd[index], ">") == 0) {
+        printf("Redirects stdout to a file.\n");
+
+        int fd1 = open(cmd[index+1], O_WRONLY);
+        if (fd1 < 0){
+            printf("Error opening the file\n");
+        }
+    }
+    else if (strcmp(cmd[index], ">>") == 0) {
+        printf("Redirects stdout to a file by appending.\n");
+    }
+    else if (strcmp(cmd[index], "<") == 0) {
+        printf("Redirect stdin from a file.\n");
+    }
+}
+*/
+
