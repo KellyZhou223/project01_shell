@@ -1,29 +1,29 @@
-## SKSSH
+# SKSSH
 By: Kelly Zhou, Sunny Li, and Serena Chan\
 TNPG: Forked Child
 
-### Features:
+## Features:
 - Forks and executes commands
 - Parses commands
 - Unfinished: Redirection, Piping
 
 ---
 
-### Attempted:
+## Attempted:
 - Some issues with trimming whitespace (?)
 - Redirection may not work (?)
 - An outline for pipes
 
 ---
 
-### Bugs:
+## Bugs:
 - Entering an empty line or an invalid command causes shell to require more "exit" to exit
 - Calling redirection/pipe functions causes shell to require more "exit" to exit (?)
 
 ---
 
-### Files and Function Headers:
-#### parse.c
+## Files and Function Headers:
+### parse.c
   * Parses both singular and multiple commands in one line
   ```
   /*======== int count_tokens() ==========
@@ -60,8 +60,11 @@ TNPG: Forked Child
   Terminating '\0' is placed at the end of the string if the last term is whitespace
   ====================*/  
   ```
-  
-  #### shell.c
+
+### parse.h
+  * Header file for parse.c
+
+### shell.c
   * Forks and executes the command, also does redirecting and piping 
   ```
   /*======== void run_command() ==========
@@ -88,3 +91,6 @@ TNPG: Forked Child
   
   ====================*/
   ```
+
+### shell.h
+  * Header file for shell.c
