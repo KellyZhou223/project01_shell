@@ -53,7 +53,7 @@ void run_command(char** command){
       redirect(command, redir_index);
     }
     else if (pipe) {                    // if pipe is true, run pipe function
-      pipe_func(command, pipe_index);
+      pipe_func(command[0], pipe_index);
     }
     else {
       execvp(command[0], command);
@@ -107,11 +107,12 @@ void redirect(char ** cmd, int index){
     }
 }
 
-int pipe_func(char ** cmd, int index) {
-  printf("Piping...\n");
-
-
-
-
-  return 0; // successfully ran
+void pipe_func(char * input, int index){
+    FILE *fp;
+    int status;
+    fp = popen(input, "w"); //
+    status = pclose(fp);
+    if (status == -1){
+        printf("Error: %s\n", strerror(WEXITSTATUS(status)));
+    }
 }
