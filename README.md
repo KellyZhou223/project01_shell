@@ -1,29 +1,31 @@
-## SKSSH
+# SKSSH
 By: Kelly Zhou, Sunny Li, and Serena Chan\
 TNPG: Forked Child
 
-### Features:
+## Features:
 - Forks and executes commands
+- Handles multiple commands on one line using ";" as a delimiter (no spaces before or after ";")
 - Parses commands
-- Unfinished: Redirection, Piping
 
 ---
 
-### Attempted:
+## Attempted:
 - Some issues with trimming whitespace (?)
 - Redirection may not work (?)
 - An outline for pipes
 
 ---
 
-### Bugs:
+## Bugs:
 - Entering an empty line or an invalid command causes shell to require more "exit" to exit
 - Calling redirection/pipe functions causes shell to require more "exit" to exit (?)
+- When running multiple commands on one line, including a space before and after ; will not work
+  (ex. ls -l ; echo hello does not work, but ls -l;echo hello does)
 
 ---
 
-### Files and Function Headers:
-#### parse.c
+## Files and Function Headers:
+### parse.c
   * Parses both singular and multiple commands in one line
   ```
   /*======== int count_tokens() ==========
@@ -60,31 +62,46 @@ TNPG: Forked Child
   Terminating '\0' is placed at the end of the string if the last term is whitespace
   ====================*/  
   ```
-  
-  #### shell.c
+
+### parse.h
+  * Header file for parse.c
+
+### shell.c
   * Forks and executes the command, also does redirecting and piping 
   ```
   /*======== void run_command() ==========
   Inputs:  char **command
-  Returns: 
+  Output: Runs the command supplied by user
   
+  Checks for redirection and pipe symbols and directs the command call to the necessary functions
+  Takes care of forking
+  Detects cd and exit in the command, uses chdir and exit respectively 
   ====================*/
   
   /*======== int length_input() ==========
   Inputs:  char *input
-  Returns: 
+  Returns: Length of the inputted string 
   
   ====================*/
   
   /*======== void trim_input() ==========
   Inputs:  char *input
-  Returns: 
-  
+
+  Replaces all occurrences of spaces in string with whitespace (to allow for run function to work properly)  
   ====================*/ 
   
   /*======== void redirect(char ** cmd, int index) ==========
   Inputs:  char **cmd, int index
-  Output:  
   
+  Redirects input by detecting redirection symbols ("<", ">", ">>").
+  ====================*/
+  
+  /*======== int pipe_func(char ** cmd, int index) ==========
+  Inputs:  char **cmd, int index
+  
+  Pipes commands; the output of the first command is used as the input for the second
   ====================*/
   ```
+
+### shell.h
+  * Header file for shell.c
