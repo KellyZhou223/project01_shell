@@ -86,7 +86,7 @@ void redirect(char ** cmd, int index){
         if (strcmp(cmd[index], ">") == 0) {
             // redirects stdout to a file
             int fd1 = open(cmd[index+1], O_WRONLY);
-            if (fd1 < 0){ // do we need this?
+            if (fd1 < 0){ 
                 printf("Error opening the file\n");
             }
             dup2(fd1, STDOUT_FILENO);
